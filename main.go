@@ -14,11 +14,15 @@ type Entry struct {
 
 var data = []Entry{}
 
-func search(key string) *Entry {
-	for i, v := range data {
-		if v.Surname == key {
-			return &data[i]
+func search(key string) *[]Entry {
+	result := make([]Entry, 0)
+	for _, v := range data {
+		if v.Name == key {
+			result = append(result, v)
 		}
+	}
+	if len(result) > 0 {
+		return &result
 	}
 	return nil
 }
@@ -33,6 +37,7 @@ func main() {
 	data = append(data, Entry{"Yura", "Petrov", "2109416471"})
 	data = append(data, Entry{"Sveta", "Volkova", "2109416871"})
 	data = append(data, Entry{"Oleg", "Fin", "2109416123"})
+	data = append(data, Entry{"Yura", "Ivanova", "2109416123"})
 
 	arguments := os.Args
 	if len(arguments) == 1 {
